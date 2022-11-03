@@ -1,14 +1,9 @@
 const path = require("path");
-
-// Use the existing order data
 const orders = require(path.resolve("src/data/orders-data"));
-
-// Use this function to assigh ID's when necessary
 const nextId = require("../utils/nextId");
 
 // TODO: Implement the /orders handlers needed to make the tests pass
 
-// Middleware / Validation: if requirements not met will return error message
 function deliverToExists(req, res, next) {
   const { data: { deliverTo } = {} } = req.body;
 
@@ -49,13 +44,6 @@ function dishesExists(req, res, next) {
   }
   return next();
 }
-
-// const array1 = [5, 12, 8, 130, 44];
-// const isLargeNumber = (element) => element > 13;
-// console.log(array1.findIndex(isLargeNumber));
-// // expected output: 3
-// The findIndex() method returns the index of the first element in an array that satisfies the provided testing function
-
 function dishQuantityExists(req, res, next) {
   const { data: { dishes } = {} } = req.body;
   const index = dishes.findIndex((dish) => !dish.quantity);
@@ -113,8 +101,6 @@ function statusPending(req, res, next) {
   });
 }
 
-/////////////////////// CRUDL ///////////////////////////////////////////////////
-
 function list(req, res) {
   res.json({ data: orders });
 }
@@ -131,8 +117,6 @@ function create(req, res) {
   orders.push(newOrder);
   res.status(201).json({ data: newOrder });
 }
-///////////// list a order ///////////////////////////////////////
-//orderExists validation is needed when you want to read,update or delete a specific id
 
 function orderExists(req, res, next) {
   const { orderId } = req.params;
@@ -153,7 +137,6 @@ function read(req, res) {
   const order = res.locals.order;
   res.json({ data: order });
 }
-////////////////////////update /////////////////////////////////
 
 function update(req, res, next) {
   const { orderId } = req.params;

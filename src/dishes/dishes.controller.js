@@ -1,8 +1,6 @@
 const path = require("path");
 
-
 const dishes = require(path.resolve("src/data/dishes-data"));
-
 
 const nextId = require("../utils/nextId");
 
@@ -36,7 +34,6 @@ function bodyDataHas(propertyName) {
   };
 }
 
-
 function create(req, res) {
   const { data: { name, description, price, image_url } = {} } = req.body;
   const newId = nextId();
@@ -50,7 +47,6 @@ function create(req, res) {
   dishes.push(newdish);
   res.status(201).json({ data: newdish });
 }
-
 
 function dishExists(req, res, next) {
   const { dishId } = req.params;
